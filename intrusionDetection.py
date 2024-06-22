@@ -13,13 +13,12 @@ import matplotlib.pyplot as plt
 def load_data(filename):
     csv_file = pd.read_csv(filename)
 
-    # ENCODING features (Features that is not numeric)
-    csv_file['label'] = csv_file['label'].apply(lambda x: 1 if x == 'normal' else 0)
-
+    # Encoding features (Features that is not numeric)
     label_encoder = LabelEncoder()
     clm=['protocol_type', 'service', 'flag']
     for x in clm:
         csv_file[x]=label_encoder.fit_transform(csv_file[x])
+    csv_file['label'] = csv_file['label'].apply(lambda x: 1 if x == 'normal' else 0)
 
     features_df = csv_file.drop(['label'], axis=1)
     labels_df = csv_file['label']
@@ -39,7 +38,6 @@ def train_model(selected_model):
 
 def evaluate(labels, predictions, dataset, model_name):
     tn, fp, fn, tp = confusion_matrix(labels, predictions).ravel()
-    print(confusion_matrix(labels, predictions))
     TPR = tp / (tp + fn)
     TNR = tn / (tn + fp)
     precision = precision_score(labels, predictions)
