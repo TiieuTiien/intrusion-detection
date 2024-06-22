@@ -68,12 +68,12 @@ Evaluate mode base on TP (True Positive), TN (True Negative), FP (False Positive
     TPR = tp / (tp + fn)
     TNR = tn / (tn + fp)
 ```
-Result with KDD Cup 1999 data set<br>
+Result with KDD Cup 1999 dataset<br>
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/52bec40f-d4b1-45b4-802d-a29c70248786" alt="kddcup_LogisticRegression" width="200px">
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/90db2bba-28b3-4fe6-adb1-37ee11bd820d" alt="kddcup_DecisionTreeClassifier" width="200px">
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/ab9478ed-931d-4509-9720-5fca8e175ff4" alt="kddcup_RandomForestClassifier" width="200px">
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/21e0cb74-99d6-4ffc-8bef-5bc07921d14b" alt="kddcup_MLPClassifier" width="200px"><br>
-Result with NSL-KDD data set<br>
+Result with NSL-KDD dataset<br>
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/90b4b9a5-f05c-4cca-b883-3363ca27ef56" alt="nslkdd_LogisticRegression" width="200px">
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/941b7551-ffcf-4565-9967-ce61c712dd37" alt="nslkdd_DecisionTreeClassifier" width="200px">
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/34381f42-aeb1-4a22-a5e7-34cf0d3bf0be" alt="nslkdd_RandomForestClassifier" width="200px">
