@@ -1,6 +1,6 @@
 # Intrusion detection on KDD Cup 1999 and NSL-KDD dataset
 
-Intrusion detection school project for network security subject.<br>
+Intrusion detection school project for network security subject using scikit-learn LogisticRegression, RandomForestClassifier, MLPClassifier, DecisionTreeClassifier models on KDD Cup 1999 and NSL-KDD dataset.<br>
 
 ## Set up
 Download or clone this repository. You can download KDD Cup 1999 and NSL-KDD dataset in the [dataset](https://github.com/TiieuTiien/intrusion-detection/tree/dataset) branch or use your own dataset.<br>
@@ -9,6 +9,10 @@ Download or clone this repository. You can download KDD Cup 1999 and NSL-KDD dat
 Create a virtual environment
 ```Python
    python -m venv venv
+```
+Activate virtual environment
+```python
+source venv/Scripts/activate
 ```
 Install requirements to acquired the same environment and needed library
 ```Python
