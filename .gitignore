@@ -1,0 +1,6 @@
+venv/
+result/
+archive/
+spliteddataset/
+changecopy.py.py
+*.txt
