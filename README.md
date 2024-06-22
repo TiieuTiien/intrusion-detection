@@ -1,2 +1,3 @@
-# intrusion-detection
- Intrusion detection school project for network security subject
+# Intrusion detection dataset
+
+Intrusion detection dataset
