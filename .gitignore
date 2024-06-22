@@ -2,6 +2,7 @@ venv/
 result/
 archive/
 spliteddataset/
+dataset/
 changecopy.py.py
 archive.zip
 splitdataset.py
