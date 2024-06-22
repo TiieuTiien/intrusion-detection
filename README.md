@@ -12,7 +12,7 @@ Create a virtual environment
 ```
 Activate virtual environment
 ```python
-source venv/Scripts/activate
+   source venv/Scripts/activate
 ```
 Install requirements to acquired the same environment and needed library
 ```Python
