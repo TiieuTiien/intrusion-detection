@@ -88,7 +88,6 @@ Distributed under the MIT license. See ```LICENSE``` for more information.
 https://github.com/TiieuTiien/
 
 ## Reference
-[NgocDung211/KDD_CUP1999](https://github.com/NgocDung211/KDD_CUP1999)<br>[Network Intrusion Detection using Python](https://www.kaggle.com/code/nidhirastogi/network-intrusion-detection-using-python)<br>[NSL-KDD Explorations
-](https://www.kaggle.com/code/timgoodfellow/nsl-kdd-explorations).<br>
+[NgocDung211/KDD_CUP1999](https://github.com/NgocDung211/KDD_CUP1999)<br>[Network Intrusion Detection using Python](https://www.kaggle.com/code/nidhirastogi/network-intrusion-detection-using-python)<br>[Intrusion Detection System [NSL-KDD]](https://www.kaggle.com/code/eneskosar19/intrusion-detection-system-nsl-kdd).<br>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
