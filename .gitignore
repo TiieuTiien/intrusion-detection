@@ -3,6 +3,7 @@ result/
 archive/
 spliteddataset/
 dataset/
+__pycache__/
 changecopy.py.py
 archive.zip
 splitdataset.py
