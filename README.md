@@ -8,19 +8,19 @@ Download or clone this repository. You can download KDD Cup 1999 and NSL-KDD dat
 ### Create a virtual environment
 Create a virtual environment
 ```Python
-   python -m venv venv
+python -m venv venv
 ```
 Activate virtual environment
 ```python
-   source venv/Scripts/activate
+source venv/Scripts/activate
 ```
 Install requirements to acquired the same environment and needed library
 ```Python
-   pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 ### Execute ```main.py``` to start the app
 ```Python
-   python main.py
+python main.py
 ```
 
 ## Data Format and Training Data
@@ -38,35 +38,35 @@ The result will be save in the ```result/``` folder.
 In ```load_data``` function
 Encoding features that are not numeric
 ```python
-    label_encoder = LabelEncoder()
-    clm=['protocol_type', 'service', 'flag']
-    for x in clm:
-        csv_file[x]=label_encoder.fit_transform(csv_file[x])
-    csv_file['label'] = csv_file['label'].apply(lambda x: 1 if x == 'normal' else 0)
+label_encoder = LabelEncoder()
+clm=['protocol_type', 'service', 'flag']
+for x in clm:
+    csv_file[x]=label_encoder.fit_transform(csv_file[x])
+csv_file['label'] = csv_file['label'].apply(lambda x: 1 if x == 'normal' else 0)
 ```
 Split the data frame into two data frames
 ```python
-    features_df = csv_file.drop(['label'], axis=1)
-    labels_df = csv_file['label']
+features_df = csv_file.drop(['label'], axis=1)
+labels_df = csv_file['label']
 ```
 ## Evaluation
 ### Training
 This 'detector' use four models from scikit-learn include: LogisticRegression, RandomForestClassifier, MLPClassifier, DecisionTreeClassifier. Train model based on the selected model and model fitting
 ```python
-    model = train_model(selected_model)
-    model.fit(X_train, labels_train)
+model = train_model(selected_model)
+model.fit(X_train, labels_train)
 ```
 ### Evaluate  
 Create predictions to evalute model
 ```python
-    predictions = model.predict(X_test)
+predictions = model.predict(X_test)
 ```
 Evaluate mode base on TP (True Positive), TN (True Negative), FP (False Positive), FN (False Negative) generated. On this project we choose to evaluate TPR and TNR
 ```python
-    tn, fp, fn, tp = confusion_matrix(labels, predictions).ravel()
-    print(confusion_matrix(labels, predictions))
-    TPR = tp / (tp + fn)
-    TNR = tn / (tn + fp)
+tn, fp, fn, tp = confusion_matrix(labels, predictions).ravel()
+print(confusion_matrix(labels, predictions))
+TPR = tp / (tp + fn)
+TNR = tn / (tn + fp)
 ```
 Result with KDD Cup 1999 dataset<br>
 <img src="https://github.com/TiieuTiien/intrusion-detection/assets/106142689/52bec40f-d4b1-45b4-802d-a29c70248786" alt="kddcup_LogisticRegression" width="200px">
