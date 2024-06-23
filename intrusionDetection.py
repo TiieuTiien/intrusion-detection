@@ -38,6 +38,7 @@ def train_model(selected_model):
 
 def evaluate(labels, predictions, dataset, model_name):
     tn, fp, fn, tp = confusion_matrix(labels, predictions).ravel()
+    print(confusion_matrix(labels, predictions))
     TPR = tp / (tp + fn)
     TNR = tn / (tn + fp)
     precision = precision_score(labels, predictions)
@@ -45,22 +46,26 @@ def evaluate(labels, predictions, dataset, model_name):
     f1 = f1_score(labels, predictions)
 
     # Bar chart
-    labels = ['Correct', 'Incorrect']
+    bar_labels = ['Correct', 'Incorrect']
+    width = 0.6
+    colors = ['tab:green', 'tab:orange']
     counts = [tp, tn]
-    colors = ['green', 'red']
 
-    plt.bar(labels, counts, color=colors)
+    plt.figure(num=model_name)
+    p = plt.bar(bar_labels, counts, width, color=colors, label=None)
     plt.xlabel('Classification')
-    plt.ylabel('Count')
+    plt.ylabel('Counts')
     plt.title('Correct and Incorrect Classifications')
 
     # Displaying true positive and true negative rates as text on the plot
-    plt.text(0, tp + 1000, f'True Positive Rate: {100*TPR:.2f}%', ha='center', va='center', color='blue')
-    plt.text(1, tn + 1000, f'True Negative Rate: {100*TNR:.2f}%', ha='center', va='center', color='blue')
+    plt.bar_label(p, labels = [f'{100*TPR:.2f}%', f'{100*TNR:.2f}%'], label_type='center', color='white')
+    plt.title('Correct and Incorrect Classifications')
+    
+    if not os.path.exists('result/'):
+        os.mkdir('result/')
     file_name = os.path.basename(dataset)  # Extract file name
-
     plt.savefig('result/'+file_name[:-10]+'_'+model_name+'.png')
-
+    
     plt.show()
 
     return TPR, TNR

@@ -13,9 +13,10 @@ class App(ttk.Window):
         self.test_file = None
 
         # Set initial window size (optional)
-        self.geometry("900x600+0+0")  # Start with screen size, adjust as needed
+        self.geometry("900x600")  # Start with screen size, adjust as needed
         self.title("Nhóm 11 - Intrusion Detection")
         self.resizable(True, True)
+        self.place_window_center()
 
         # Create and configure main window grid
         self.grid_rowconfigure((0,1,2,4,5), weight=1)  # Expand row to fill available space
