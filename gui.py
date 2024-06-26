@@ -33,7 +33,7 @@ class App(ttk.Window):
         # Create widgets directly on the content_frame
         import_data_frame = ttk.Frame(self)
         import_data_frame.grid(row=1, column=1, sticky="nsew")
-        import_data_frame.columnconfigure((0,1,2,3,4), weight=1)
+        import_data_frame.columnconfigure((0,1,2,3,4,5), weight=1)
 
         ttk.Label(import_data_frame, text="Datasets:").grid(row=0, column=0, sticky="e")
         
@@ -46,6 +46,8 @@ class App(ttk.Window):
 
         self.button_models_path = ttk.Button(import_data_frame, text="Model path", width=10, padding=8)
         self.button_models_path.grid(row=0, column=4)
+        self.label_models_path = ttk.Label(import_data_frame, text="")
+        self.label_models_path.grid(row=0, column=5)
 
         # Model Selection
         select_datasets = ttk.Frame(self)
