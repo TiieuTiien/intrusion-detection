@@ -120,10 +120,10 @@ def eval_metric(model, dataset):
     print("Test_Set")
     print(confusion_matrix(y_test, y_pred))
     print(classification_report(y_test,y_pred,digits=4))
-#     print()
-#     print("Train_Set")
-#     print(confusion_matrix(y_train, y_train_pred))
-#     print(classification_report(y_train,y_train_pred,digits=4))
+    print()
+    print("Train_Set")
+    print(confusion_matrix(y_train, y_train_pred))
+    print(classification_report(y_train,y_train_pred,digits=4))
     
     write_folder = "result/" + os.path.basename(dataset)[:-4] + "/"
     write_path = write_folder + os.path.basename(dataset)[:-4] + ".txt"
@@ -171,10 +171,11 @@ def evaluate(selected_model, dataset):
 
     ax.legend(ncols=1)
     
-    plt.title(f'{model_name} on KDD Cup 1999')
+    plt.title(f'{model_name} on {os.path.basename(dataset)[:-4]}')
     
     # Show the chart
     plt.ylim(0, 1.4)
+    plt.savefig("result/" + model_name + "_" + os.path.basename(dataset)[:-4] + ".png")
     plt.show()
 
 def evaluate_all(models, dataset):
@@ -231,5 +232,5 @@ def evaluate_all(models, dataset):
     
     # Show the chart
     plt.ylim(0, 1.4)
-    # plt.savefig(fname)
+    plt.savefig("result/" + "eval_all_" + os.path.basename(dataset)[:-4] + ".png")
     plt.show()

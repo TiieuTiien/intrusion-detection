@@ -65,15 +65,15 @@ class App(ttk.Window):
         self.textbox1 = ScrolledText(self, width=80, height=8, font="Arial 10 bold")
         self.textbox1.grid(row=3, column=1, columnspan=2, sticky="nsew")
 
-        self.button_train = ttk.Button(self, text="Training", style="warning", width=9, padding=8, cursor="hand2")
-        self.button_train.grid(row=4, column=1)
+        self.button_train = ttk.Button(self, text="Evaluate", style="warning", width=9, padding=8, cursor="hand2")
+        self.button_train.grid(row=4, column=0, columnspan=2)
         
-        self.button_eval_all = ttk.Button(self, text="Evaluate All", style="warning", width=9, padding=8, cursor="hand2")
-        self.button_eval_all.grid(row=4, column=2)
+        self.button_eval_all = ttk.Button(self, text="Evaluate All", style="warning", width=12, padding=8, cursor="hand2")
+        self.button_eval_all.grid(row=4, column=1, columnspan=2)
 
-        ttk.Label(self, text="Accuracy:").grid(row=5, column=1, pady=10, sticky="w")
-        self.textbox2 = ScrolledText(self, width=80, height=8, font="Arial 10 bold")
-        self.textbox2.grid(row=6, column=1, columnspan=2, sticky="nsew")
+        # ttk.Label(self, text="Detail:").grid(row=5, column=1, pady=10, sticky="w")
+        # self.textbox2 = ScrolledText(self, width=80, height=8, font="Arial 10 bold")
+        # self.textbox2.grid(row=6, column=1, columnspan=2, sticky="nsew")
 
 # if __name__ == "__main__":
 #     app = App()
