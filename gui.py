@@ -37,15 +37,15 @@ class App(ttk.Window):
 
         ttk.Label(import_data_frame, text="Datasets:").grid(row=0, column=0, sticky="e")
         
-        self.label_train_csv = ttk.Label(import_data_frame, text="")
-        self.label_train_csv.grid(row=0, column=2)
-        self.button_train_csv = ttk.Button(import_data_frame, text="Data train", width=9, padding=8)  # No command here
-        self.button_train_csv.grid(row=0, column=1)
+        self.button_load_data = ttk.Button(import_data_frame, text="Dataset", width=9, padding=8)
+        self.button_load_data.grid(row=0, column=1)
+        self.label_train_data = ttk.Label(import_data_frame, text="")
+        self.label_train_data.grid(row=0, column=2)
 
-        self.label_test_csv = ttk.Label(import_data_frame, text="")
-        self.label_test_csv.grid(row=0, column=4)
-        self.button_test_csv = ttk.Button(import_data_frame, text="Data test", width=9, padding=8)  # No command here
-        self.button_test_csv.grid(row=0, column=3)
+        ttk.Label(import_data_frame, text="Models path:").grid(row=0, column=3, sticky="e")
+
+        self.button_models_path = ttk.Button(import_data_frame, text="Model path", width=10, padding=8)
+        self.button_models_path.grid(row=0, column=4)
 
         # Model Selection
         select_datasets = ttk.Frame(self)
@@ -53,18 +53,26 @@ class App(ttk.Window):
         select_datasets.columnconfigure((0,1), weight=1)
 
         ttk.Label(select_datasets, text="Model:").grid(row=0, column=0, sticky="e")
-        options = ["RandomForestClassifier", "LogisticRegression", "MLPClassifier", "DecisionTreeClassifier"]
+        # options = ["RandomForestClassifier", "LogisticRegression", "MLPClassifier", "DecisionTreeClassifier"]
         self.selected_model = StringVar(self)
-        self.selected_model.set("MLPClassifier")
-        OptionMenu(select_datasets, self.selected_model, *options).grid(row=0, column=1, sticky="w")
+        self.selected_model.set("None")
+        self.model_option_menu = OptionMenu(select_datasets, self.selected_model, "None")
+        self.model_option_menu.grid(row=0, column=1, sticky="w")
 
         ttk.Label(self, text="Table header:").grid(row=2, column=1, pady=10, sticky="w")
         self.textbox1 = ScrolledText(self, width=80, height=8, font="Arial 10 bold")
         self.textbox1.grid(row=3, column=1, columnspan=2, sticky="nsew")
 
         self.button_train = ttk.Button(self, text="Training", style="warning", width=9, padding=8, cursor="hand2")
-        self.button_train.grid(row=4, column=1, columnspan=2)
+        self.button_train.grid(row=4, column=1)
+        
+        self.button_eval_all = ttk.Button(self, text="Evaluate All", style="warning", width=9, padding=8, cursor="hand2")
+        self.button_eval_all.grid(row=4, column=2)
 
         ttk.Label(self, text="Accuracy:").grid(row=5, column=1, pady=10, sticky="w")
         self.textbox2 = ScrolledText(self, width=80, height=8, font="Arial 10 bold")
         self.textbox2.grid(row=6, column=1, columnspan=2, sticky="nsew")
+
+# if __name__ == "__main__":
+#     app = App()
+#     app.mainloop()

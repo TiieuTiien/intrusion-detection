@@ -2,8 +2,8 @@ venv/
 result/
 archive/
 spliteddataset/
-dataset/
 __pycache__/
+.vscode/
 changecopy.py.py
 archive.zip
 splitdataset.py
