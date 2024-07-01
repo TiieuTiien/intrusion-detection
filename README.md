@@ -18,6 +18,7 @@ Install requirements to acquired the same environment and needed library
 ```Python
 pip install -r requirements.txt
 ```
+Extract models and dataset files in each folder
 ### Execute ```main.py``` to start the app
 ```Python
 python main.py

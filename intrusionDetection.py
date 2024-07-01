@@ -72,40 +72,6 @@ def train_model(selected_model):
     else:
         model = DecisionTreeClassifier()
     return model
-
-def evaluate(labels, predictions, dataset, model_name):
-    tn, fp, fn, tp = confusion_matrix(labels, predictions).ravel()
-    print(confusion_matrix(labels, predictions))
-    TPR = tp / (tp + fn)
-    TNR = tn / (tn + fp)
-    precision = precision_score(labels, predictions)
-    recall = recall_score(labels, predictions)
-    f1 = f1_score(labels, predictions)
-
-    # Bar chart
-    bar_labels = ['Correct', 'Incorrect']
-    width = 0.6
-    colors = ['tab:green', 'tab:orange']
-    counts = [tp, tn]
-
-    plt.figure(num=model_name)
-    p = plt.bar(bar_labels, counts, width, color=colors, label=None)
-    plt.xlabel('Classification')
-    plt.ylabel('Counts')
-    plt.title('Correct and Incorrect Classifications')
-
-    # Displaying true positive and true negative rates as text on the plot
-    plt.bar_label(p, labels = [f'{100*TPR:.2f}%', f'{100*TNR:.2f}%'], label_type='center', color='white')
-    plt.title('Correct and Incorrect Classifications')
-    if not os.path.exists('result/'):
-        os.mkdir('result/')
-    file_name = os.path.basename(dataset)  # Extract file name
-    plt.savefig('result/'+file_name[:-10]+'_'+model_name+'.png')
-    
-    plt.show()
-
-    return TPR, TNR
-    # return TPR, TNR, precision, recall, f1
     
 # Helper function to evaluate if it's overfit or underfit.
 def eval_metric(model, dataset):
@@ -115,30 +81,18 @@ def eval_metric(model, dataset):
     
     y_test_score = classification_report(y_test,y_pred,output_dict=True)
     y_train_score = classification_report(y_train,y_train_pred,output_dict=True)
+
+    # Tạo chuỗi kết quả
+    results = ""
+    results += "========================" + model.__class__.__name__ + "========================\n"
+    results += "Test_Set\n"
+    results += str(confusion_matrix(y_test, y_pred)) + "\n"
+    results += classification_report(y_test, y_pred, digits=4) + "\n\n"
+    results += "Train_Set\n"
+    results += str(confusion_matrix(y_train, y_train_pred)) + "\n"
+    results += classification_report(y_train, y_train_pred, digits=4) + "\n"
     
-    print("========================" + model.__class__.__name__ + "========================")
-    print("Test_Set")
-    print(confusion_matrix(y_test, y_pred))
-    print(classification_report(y_test,y_pred,digits=4))
-    print()
-    print("Train_Set")
-    print(confusion_matrix(y_train, y_train_pred))
-    print(classification_report(y_train,y_train_pred,digits=4))
-    
-    write_folder = "result/" + os.path.basename(dataset)[:-4] + "/"
-    write_path = write_folder + os.path.basename(dataset)[:-4] + ".txt"
-    if not os.path.exists(write_folder):
-        os.mkdir(write_folder)
-    with open(write_path, "a") as f:
-        f.write("========================" + model.__class__.__name__ + "========================\n")
-        f.write("Test_Set\n")
-        f.write(str(confusion_matrix(y_test, y_pred)) + "\n")
-        f.write(classification_report(y_test, y_pred, digits=4) + "\n\n")
-        f.write("Train_Set\n")
-        f.write(str(confusion_matrix(y_train, y_train_pred)) + "\n")
-        f.write(classification_report(y_train, y_train_pred, digits=4) + "\n")
-    
-    return y_test_score['macro avg']
+    return y_test_score['macro avg'], results
 
 def evaluate(selected_model, dataset):
     model = selected_model
@@ -146,13 +100,32 @@ def evaluate(selected_model, dataset):
     X_train, X_test, y_train, y_test = load_data(dataset)
 
     y_pred = model.predict(X_test)
+    y_train_pred = model.predict(X_train)
     
     y_test_score = classification_report(y_test,y_pred,output_dict=True)
-    
-    print("========================" + model_name + "========================")
-    print("Test_Set")
-    print(confusion_matrix(y_test, y_pred))
-    print(classification_report(y_test,y_pred,digits=4))
+    y_train_score = classification_report(y_train,y_train_pred,output_dict=True)
+
+    # Tạo chuỗi kết quả
+    results = ""
+    results += "========================" + model.__class__.__name__ + "========================\n"
+    results += "Test_Set\n"
+    results += str(confusion_matrix(y_test, y_pred)) + "\n"
+    results += classification_report(y_test, y_pred, digits=4) + "\n\n"
+    results += "Train_Set\n"
+    results += str(confusion_matrix(y_train, y_train_pred)) + "\n"
+    results += classification_report(y_train, y_train_pred, digits=4) + "\n"
+
+    write_path = "result/" + selected_model.__class__.__name__ + "_" + os.path.basename(dataset)[:-4] + ".txt"
+
+    # Create the 'result/' directory if it does not exist
+    if not os.path.exists('result/'):
+        os.mkdir('result/')
+
+    # Remove the existing file if it exists
+    if os.path.exists(write_path):
+        os.remove(write_path)
+    with open(write_path, "a") as f:
+        f.write(results)
 
     fig, ax = plt.subplots()
     
@@ -179,22 +152,29 @@ def evaluate(selected_model, dataset):
     plt.show()
 
 def evaluate_all(models, dataset):
-    # Open file in write mode
-    # write_path = "/kaggle/working/" + os.path.basename(dataset)[:-4] + ".txt"
-    # fname="/kaggle/working/" + os.path.basename(dataset)[:-4] + ".png"
+    write_path = "result/" + os.path.basename(dataset)[:-4] + ".txt"
 
-    # if os.path.exists(write_path):
-    #     os.remove(write_path)
-    # if os.path.exists(fname):
-    #     os.remove(fname)
+    # Create the 'result/' directory if it does not exist
+    if not os.path.exists('result/'):
+        os.mkdir('result/')
+
+    # Remove the existing file if it exists
+    if os.path.exists(write_path):
+        os.remove(write_path)
+
+    results_file = ""
 
     scores = {}
     for model in models:
-        data = eval_metric(model, dataset)
+        data, results = eval_metric(model, dataset)# Ghi chuỗi kết quả vào file
+        results_file += results
         # Using list comprehension
         numeric_values = [value for value in data.values() if value != 'support']
 
         scores.update({model.__class__.__name__: numeric_values})
+    
+    with open(write_path, "a") as f:
+        f.write(results_file)
 
     # Extract specific test metrics
     metrics = ('Precision','Recall','F1-Score')
